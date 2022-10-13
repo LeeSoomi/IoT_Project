@@ -45,6 +45,8 @@ void setup() {
 
   Serial.begin(9600);
   delay(1500);
+  
+  //IoT Cloud 사용되는 기본 함수
   initProperties();
   // Connect to Arduino IoT Cloud
   ArduinoCloud.begin(ArduinoIoTPreferredConnection);
@@ -56,13 +58,16 @@ void setup() {
   }
   delay(500);
   CARRIER_CASE = false ; //케이스 사용 안함
-  carrier.begin();
+  carrier.begin(); 
   carrier.display.setRotation(0); 
   delay(1500);
 }
 
 void loop() {
+  //IoT Cloud 사용시 호출되는 기본 함수
   ArduinoCloud.update();
+  
+  // 만들어져있는 함수 호출
   readSensors() ;
   sensor_Data() ;
   displayData() ;
