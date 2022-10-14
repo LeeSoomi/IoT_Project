@@ -133,7 +133,8 @@ void sensor_Data() {
 }
 
 void displayData() {
-  //MKR IoT Carrier의 내장센서인 터치센서를 누르면 스크린에 온도, 습도, 기압을 보여준다.
+  //MKR IoT Carrier의 내장센서인 터치센서를 누르면 
+  //스크린에 온도, 습도, 기압을 보여준다.
   // 터치 0 > 온도값
   // 터치 1 > 습도값
   // 터치 2 > 기압값
