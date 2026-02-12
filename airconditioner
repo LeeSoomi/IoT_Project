@@ -1,0 +1,47 @@
+#include "thingProperties.h"
+#include <DHT.h>
+#define DHTPIN 12    
+#define DHTTYPE DHT11  
+DHT dht(DHTPIN, DHTTYPE);
+
+int green_LED = 13;
+int red_LED = 14;
+int MotorIN1 = 4;
+int MotorIN2 = 5;
+
+void setup() {
+  pinMode(green_LED, OUTPUT);
+  pinMode(red_LED, OUTPUT);
+  pinMode(MotorIN1, OUTPUT);
+  pinMode(MotorIN2, OUTPUT);
+  dht.begin();
+
+  initProperties();
+  ArduinoCloud.begin(ArduinoIoTPreferredConnection);
+  setDebugMessageLevel(2);
+  ArduinoCloud.printDebugInfo();
+}
+
+void loop() {
+  ArduinoCloud.update();
+  float h = dht.readHumidity();
+  temperature = dht.readTemperature();
+}
+
+void onPowerSwitchChange()  {
+  if(power_switch){
+    digitalWrite(green_LED, HIGH);
+    digitalWrite(red_LED, LOW);
+    analogWrite(MotorIN1, 800);
+    analogWrite(MotorIN2, 0);
+    motor_speed = 100;
+  }
+  
+   else{
+    digitalWrite(green_LED, LOW);
+    digitalWrite(red_LED, HIGH);
+    analogWrite(MotorIN1, 0);
+    analogWrite(MotorIN2, 0);
+    motor_speed = 0;
+  }   
+}
